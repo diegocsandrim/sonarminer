@@ -1,16 +1,20 @@
 # sonarminer
 
-SonarMiner is a tool to automate SonarQube analysis over time in Git repositories.
+SonarMiner is a tool to automate SonarQube analysis over time in GitHub repositories.
 
+
+# Requirements
+
+- Go
+- Docker
+- Docker compose
 
 # Setup
 
-go build .
-docker-compose up -d
-
 ```sh
 sudo sysctl -w vm.max_map_count=262144 # or edit /etc/sysctl.conf
-docker-compose up
+go build .
+docker compose up -d
 ```
 
 # Usage
@@ -24,12 +28,12 @@ docker-compose up
 Basic data can be accessed with SQL:
 
 ```
-cat queries/basic.sql | docker exec -i sonarminer_db_1 psql -U sonar
+cat queries/basic.sql | docker compose exec -T db psql -U sonar
 ```
 
 
 # Clean up
 
 ```
-docker-compose down
+docker compose down
 ```
