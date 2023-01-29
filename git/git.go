@@ -17,7 +17,7 @@ var GitBaseDir string
 
 func init() {
 	GitBaseDir = path.Join(os.TempDir(), "sonarminer")
-	err := os.MkdirAll(GitBaseDir, 0644)
+	err := os.MkdirAll(GitBaseDir, 0775)
 	if err != nil {
 		panic(fmt.Sprintf("fail to create a temp directory for sonarminer, dir: '%s', error: %s", GitBaseDir, err.Error()))
 	}
@@ -68,7 +68,7 @@ git pull`
 
 	_, err := cmd.NewCmdFactory(g.ProjectDir()).ExecF(clearCommand)
 	if err != nil {
-		log.Printf("failed to clone: %s. Will try to force clone", err.Error())
+		log.Printf("project is not in local cache, cloning from remote...")
 		return g.ForceClone()
 	}
 	return nil
